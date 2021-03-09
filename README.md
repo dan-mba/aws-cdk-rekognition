@@ -1,7 +1,10 @@
 
-# Welcome to your CDK Python project!
+# CDK Python Rekognition Detect Labels API
 
-This is a blank project for Python development with CDK.
+`POST /labels`<br>
+Post image and it returns an array of labels & confidence intervals
+
+## CDK instructions
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
@@ -22,7 +25,7 @@ After the init process completes and the virtualenv is created, you can use the 
 step to activate your virtualenv.
 
 ```
-$ source .venv/bin/activate
+$ source .venv/Scripts/activate
 ```
 
 If you are a Windows platform, you would activate the virtualenv like this:
@@ -44,7 +47,7 @@ $ cdk synth
 ```
 
 To add additional dependencies, for example other CDK libraries, just add
-them to your `setup.py` file and rerun the `pip install -r requirements.txt`
+them to your `requirements.txt` file and rerun the `pip install -r requirements.txt`
 command.
 
 ## Useful commands
