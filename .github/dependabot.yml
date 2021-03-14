@@ -1,0 +1,8 @@
+#dependabot config for pip
+
+version: 2
+updates:
+  - directory: "/"
+    package-ecosystem: "pip"
+    schedule:
+      interval: "weekly"
