@@ -1,4 +1,4 @@
-aws-cdk.core==1.116.0
+aws-cdk.core==1.121.0
 aws-cdk.aws-apigatewayv2==1.121.0
 aws-cdk.aws-apigatewayv2-integrations==1.121.0
 aws-cdk.aws-iam==1.116.0
