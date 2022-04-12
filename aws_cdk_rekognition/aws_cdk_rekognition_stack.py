@@ -1,13 +1,15 @@
-from aws_cdk import core as cdk
+from constructs import Construct
+from aws_cdk import Stack, CfnOutput
 from aws_cdk.aws_lambda import (
     Code,
     Function,
-    Runtime
+    Runtime,
+    Architecture
 )
-from aws_cdk.aws_apigatewayv2_integrations import (
-    LambdaProxyIntegration
+from aws_cdk.aws_apigatewayv2_integrations_alpha import (
+    HttpLambdaIntegration
 )
-from aws_cdk.aws_apigatewayv2 import (
+from aws_cdk.aws_apigatewayv2_alpha import (
     HttpApi,
     CorsPreflightOptions,
     HttpMethod
@@ -18,16 +20,17 @@ from aws_cdk.aws_iam import (
 )
 
 
-class AwsCdkRekognitionStack(cdk.Stack):
+class AwsCdkRekognitionStack(Stack):
 
-    def __init__(self, scope: cdk.Construct, construct_id: str, **kwargs) -> None:
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
         # The code that defines your stack goes here
         rekLambda = Function(self, "REK_LAMBDA",
-                             runtime=Runtime.PYTHON_3_8,
+                             runtime=Runtime.PYTHON_3_9,
                              code=Code.from_asset("./rek_lambda"),
-                             handler="app.handler"
+                             handler="app.handler",
+                             architecture=Architecture.ARM_64,
                              )
 
         rekLambda.add_to_role_policy(
@@ -38,7 +41,7 @@ class AwsCdkRekognitionStack(cdk.Stack):
             )
         )
 
-        rekInt = LambdaProxyIntegration(handler=rekLambda)
+        rekInt = HttpLambdaIntegration("LambdaProxyIntegration", handler=rekLambda)
 
         rekAPI = HttpApi(self, "LABELS_API",
                          cors_preflight=CorsPreflightOptions(
@@ -56,7 +59,7 @@ class AwsCdkRekognitionStack(cdk.Stack):
             integration=rekInt
         )
 
-        cdk.CfnOutput(self, "URL",
-                      value=f"{rekAPI.url}labels",
-                      description="API url"
-                      )
+        CfnOutput(self, "URL",
+                  value=f"{rekAPI.url}labels",
+                  description="API url"
+                  )
