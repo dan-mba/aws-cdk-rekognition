@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
-from aws_cdk import core as cdk
+from aws_cdk import App
 
 from aws_cdk_rekognition.aws_cdk_rekognition_stack import AwsCdkRekognitionStack
 
-app = cdk.App()
+app = App()
 AwsCdkRekognitionStack(app, "aws-cdk-rekognition")
 
 app.synth()
