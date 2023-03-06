@@ -1,5 +1,5 @@
 aws-cdk-lib==2.63.2
 constructs>=10.0.0,<11.0.0
 aws-cdk.aws-apigatewayv2-alpha==2.63.2a0
-aws-cdk.aws-apigatewayv2-integrations-alpha==2.63.2a0
+aws-cdk.aws-apigatewayv2-integrations-alpha==2.67.0a0
 boto3==1.26.82
