@@ -6,3 +6,7 @@ updates:
     package-ecosystem: "pip"
     schedule:
       interval: "monthly"
+    groups:
+      cdk:
+        patterns:
+          - "aws-cdk*"
