@@ -6,13 +6,14 @@ from aws_cdk.aws_lambda import (
     Runtime,
     Architecture
 )
-from aws_cdk.aws_apigatewayv2_integrations_alpha import (
+from aws_cdk.aws_apigatewayv2_integrations import (
     HttpLambdaIntegration
 )
-from aws_cdk.aws_apigatewayv2_alpha import (
+from aws_cdk.aws_apigatewayv2 import (
     HttpApi,
     CorsPreflightOptions,
-    HttpMethod
+    HttpMethod,
+    CorsHttpMethod
 )
 from aws_cdk.aws_iam import (
     PolicyStatement,
@@ -27,7 +28,7 @@ class AwsCdkRekognitionStack(Stack):
 
         # The code that defines your stack goes here
         rekLambda = Function(self, "REK_LAMBDA",
-                             runtime=Runtime.PYTHON_3_9,
+                             runtime=Runtime.PYTHON_3_11,
                              code=Code.from_asset("./rek_lambda"),
                              handler="app.handler",
                              architecture=Architecture.ARM_64,
@@ -47,7 +48,7 @@ class AwsCdkRekognitionStack(Stack):
                          cors_preflight=CorsPreflightOptions(
                              allow_headers=["content-type"],
                              allow_methods=[
-                                 HttpMethod.OPTIONS, HttpMethod.POST],
+                                 CorsHttpMethod.OPTIONS, CorsHttpMethod.POST],
                              allow_origins=[
                                  "http://localhost:3000", "https://dan-mba.github.io"]
                          )
