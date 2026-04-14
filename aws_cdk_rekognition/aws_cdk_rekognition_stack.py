@@ -28,7 +28,7 @@ class AwsCdkRekognitionStack(Stack):
 
         # The code that defines your stack goes here
         rekLambda = Function(self, "REK_LAMBDA",
-                             runtime=Runtime.PYTHON_3_11,
+                             runtime=Runtime.PYTHON_3_14,
                              code=Code.from_asset("./rek_lambda"),
                              handler="app.handler",
                              architecture=Architecture.ARM_64,
